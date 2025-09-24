@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "AutoClick Connexion Alcasar",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Clique automatiquement sur le bouton 'Authentification' au chargement de la page.",
   "content_scripts": [
     {

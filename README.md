@@ -1,7 +1,7 @@
 # Alcasar Chrome Extension
 
-![GitHub Release (latest by semver)](https://img.shields.io/github/v/release/tonpseudo/alcasar-chrome-extension)
-![License](https://img.shields.io/github/license/tonpseudo/alcasar-chrome-extension)
+![GitHub Release (latest by semver)](https://img.shields.io/github/v/release/DorianABDS/alcasar-chrome-extension)
+![License](https://img.shields.io/github/license/DorianABDS/alcasar-chrome-extension)
 [![Extension Chrome](https://img.shields.io/badge/Chrome%20Web%20Store-Visiter%20l'extension-blue?logo=google-chrome)](https://chrome.google.com/webstore/detail/alcasar-chrome-extension)
 
 

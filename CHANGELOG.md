@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/DorianABDS/alcasar-chrome-extension/compare/v1.1.0...v1.3.0) (2025-09-24)
+
+
+### Features
+
+* **method:** streamline autoReconnect function for improved input interaction ([abd489b](https://github.com/DorianABDS/alcasar-chrome-extension/commit/abd489b61a1dc7d47391041c961fbb0b4bfdc525))
+
 ## [1.2.0](https://github.com/DorianABDS/alcasar-chrome-extension/compare/v1.1.0...v1.2.0) (2025-09-24)
 
 

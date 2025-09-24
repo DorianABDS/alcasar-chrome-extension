@@ -27,9 +27,11 @@ function autoReconnect() {
     const inputCheck = document.querySelector(".App-Input");
     if (inputCheck) {
         inputCheck.focus();
+        // ? Test to remove the line 31 to get the simulate click
         inputCheck.click();
         console.log("Simulated interaction on input");
 
+        // authentificate button to get the connection
         const btn = document.querySelector(".App-Button");
         if (btn) {
             btn.click();

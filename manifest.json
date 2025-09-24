@@ -1,12 +1,16 @@
 {
   "manifest_version": 3,
   "name": "AutoClick Connexion Alcasar",
-  "version": "1.0",
+  "version": "1.1.0",
   "description": "Clique automatiquement sur le bouton 'Authentification' au chargement de la page.",
   "content_scripts": [
     {
-      "matches": ["https://alcasar.laplateforme.io/*"],
-      "js": ["content_script.js"],
+      "matches": [
+        "https://alcasar.laplateforme.io/*"
+      ],
+      "js": [
+        "content_script.js"
+      ],
       "run_at": "document_idle"
     }
   ]

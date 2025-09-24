@@ -1,6 +1,6 @@
 {
   "name": "auto-connexion-alcasar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "devDependencies": {
     "@eslint/js": "^9.30.1",

@@ -1,0 +1,60 @@
+name: Release on push to main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Skip if tag already exists
+        id: check_tag
+        run: |
+          TAG="v$(node -p "require('./package.json').version")"
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists, skipping release."
+            echo "SKIP=true" >> $GITHUB_OUTPUT
+          else
+            echo "SKIP=false" >> $GITHUB_OUTPUT
+          fi
+
+      - run: npm ci
+
+      - name: Configure Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run release
+        if: steps.check_tag.outputs.SKIP == 'false'
+        run: npm run release
+
+      - name: Commit version bump and changelog
+        if: steps.check_tag.outputs.SKIP == 'false'
+        run: |
+          git add package.json package-lock.json CHANGELOG.md manifest.json
+          git diff --cached --quiet || (git commit -m "chore(release): bump version [skip ci]" && git push origin main)
+
+      - name: Push tags
+        if: steps.check_tag.outputs.SKIP == 'false'
+        run: git push origin --tags
+
+      - name: Create GitHub Release
+        if: steps.check_tag.outputs.SKIP == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.check_tag.outputs.TAG }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

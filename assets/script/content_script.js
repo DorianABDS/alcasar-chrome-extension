@@ -1,27 +1,44 @@
-const CLICK_DELAY_MS = 2000; // 2s
+const CHECK_INTERVAL_MS = 2000; // 2s
 
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    // Simulate a click on the first input to trigger user interaction
-    const inputCheck = document.querySelector(".App-Input");
-    if (!inputCheck) {
-      console.log("Already connected, no action taken.");
-      return;
-    }
+function autoReconnect() {
+  // If logout button exists, click it to go back to menu
+  // TODO: rename class with the good name
+  const logoutLink = document.querySelector(".{ID_name_logout}");
+  if (logoutLink) {
+    logoutLink.click();
+    console.log(`'.{ID_name_logout}' clicked to go back to menu`);
+  }
 
+  // If login button exists, click it to go to the login page
+  // TODO: rename class with the good name
+  const loginLink = document.querySelector(".{ID_name_login}");
+  if (loginLink) {
+    loginLink.click();
+    console.log(`'.{ID_name_login}' clicked to go to login page`);
+  }
+
+  // If login input exists, simulate interaction and click the button
+  const inputCheck = document.querySelector(".App-Input");
+  if (inputCheck) {
     inputCheck.focus();
     inputCheck.click();
     console.log("Simulated interaction on input");
 
-    // Wait a short moment before clicking the button
-    setTimeout(() => {
-      const btn = document.querySelector(".App-Button");
-      if (btn) {
-        btn.click();
-        console.log(`'.App-Button' clicked after interaction`);
-      } else {
-        console.log("No '.App-Button' found");
-      }
-    }, 200); // 0.2s
-  }, CLICK_DELAY_MS);
+    const btn = document.querySelector(".App-Button");
+    if (btn) {
+      btn.click();
+      console.log(`'.App-Button' clicked after interaction`);
+    } else {
+      console.log("No '.App-Button' found");
+    }
+  } else {
+    console.log("Already connected or input not found");
+  }
+}
+
+// Automatically run on page load
+window.addEventListener("load", () => {
+  autoReconnect();
+  // Continuous check to stay connected
+  setInterval(autoReconnect, CHECK_INTERVAL_MS);
 });

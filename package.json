@@ -1,0 +1,15 @@
+{
+  "name": "auto-connexion-alcasar",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "eslint": "^9.30.1",
+    "globals": "^16.3.0",
+    "standard-version": "^9.5.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "release": "standard-version && node assets/script/sync-version.js"
+  }
+}

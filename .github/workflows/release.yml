@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -31,10 +34,11 @@ jobs:
 
       - run: npm ci
 
-      - name: Configure Git user
+      - name: Configure Git for pushing
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/DorianABDS/alcasar-chrome-extension.git
 
       - name: Run release
         if: steps.check_tag.outputs.SKIP == 'false'
@@ -44,7 +48,8 @@ jobs:
         if: steps.check_tag.outputs.SKIP == 'false'
         run: |
           git add package.json package-lock.json CHANGELOG.md manifest.json
-          git diff --cached --quiet || (git commit -m "chore(release): bump version [skip ci]" && git push origin main)
+          git diff --cached --quiet || git commit -m "chore(release): bump version [skip ci]"
+          git push origin main
 
       - name: Push tags
         if: steps.check_tag.outputs.SKIP == 'false'

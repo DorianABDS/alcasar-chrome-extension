@@ -2,7 +2,7 @@ const CHECK_INTERVAL_MS = 2000; // 2s
 
 function autoReconnect() {
   // If logout button exists, click it to go back to menu
-  // TODO: rename class with the good name
+  // TODO: rename ID_name_logout with the good name
   const logoutLink = document.querySelector(".{ID_name_logout}");
   if (logoutLink) {
     logoutLink.click();
@@ -10,7 +10,7 @@ function autoReconnect() {
   }
 
   // If login button exists, click it to go to the login page
-  // TODO: rename class with the good name
+  // TODO: rename ID_name_logout with the good name
   const loginLink = document.querySelector(".{ID_name_login}");
   if (loginLink) {
     loginLink.click();

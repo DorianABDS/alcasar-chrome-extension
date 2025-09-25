@@ -16,9 +16,9 @@ function autoReconnect() {
                 setTimeout(() => {
                     btn.click();
                     console.log("Login button clicked after delay");
-                }, 2000);
+                }, 1000);
             }
-        }, 2000);
+        }, 1000);
         return;
     }
 

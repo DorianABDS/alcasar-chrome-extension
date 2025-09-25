@@ -2,7 +2,7 @@
 
 ![GitHub Release (latest by semver)](https://img.shields.io/github/v/release/DorianABDS/alcasar-chrome-extension)
 ![License](https://img.shields.io/github/license/DorianABDS/alcasar-chrome-extension)
-[![Chrome Extension](https://img.shields.io/badge/Chrome%20Web%20Store-Visit%20Extension-blue?logo=google-chrome)](https://chrome.google.com/webstore/detail/alcasar-chrome-extension)
+[![Chrome Extension](https://img.shields.io/badge/Chrome%20Web%20Store-Visit%20Extension-blue?logo=google-chrome)](https://chromewebstore.google.com/detail/auto-connexion-alcasar/foahdadbihpllnladnpbdhlildjiomgg?hl=fr&utm_source=ext_sidebar)
 
 This Chrome extension allows you to **automatically handle the authentication flow** on the [Alcasar](https://alcasar.laplateforme.io) portal. It clicks buttons and simulates user interactions to maintain connection without manual intervention.
 

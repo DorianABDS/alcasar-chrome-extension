@@ -1,52 +1,51 @@
 const CHECK_INTERVAL_MS = 2000; // 2s
 
 function autoReconnect() {
-    // If logout button exists, click it to go back to menu
-    // TODO: rename ID_name_logout with the good name
-    const logoutLink = document.querySelector(".{ID_name_logout}");
-    if (logoutLink) {
-        logoutLink.click();
-        console.log(`'.{ID_name_logout}' clicked to go back to menu`);
-    } else {
-        console.log(`'No '.{ID_name_logout}' found`);
-        return;
-    }
+    const inputCheck = document.querySelector(".App-Input"); // login input
+    const btn = document.querySelector(".App-Button"); // login button
 
-    // If login button exists, click it to go to the login page
-    // TODO: rename ID_name_logout with the good name
-    const loginLink = document.querySelector(".{ID_name_login}");
-    if (loginLink) {
-        loginLink.click();
-        console.log(`'.{ID_name_login}' clicked to go to login page`);
-    } else {
-        console.log(`'No '.{ID_name_logout}' found`);
-        return;
-    }
-
-    // If login input exists, simulate interaction and click the button
-    const inputCheck = document.querySelector(".App-Input");
+    // Login page
     if (inputCheck) {
-        inputCheck.focus();
-        // ? Test to remove the line 31 to get the simulate click
-        inputCheck.click();
-        console.log("Simulated interaction on input");
+        // wait 2s to let credentials appear
+        setTimeout(() => {
+            inputCheck.focus();
+            inputCheck.click();
+            console.log("Simulated interaction on input");
 
-        // authentificate button to get the connection
-        const btn = document.querySelector(".App-Button");
-        if (btn) {
-            btn.click();
-            console.log(`'.App-Button' clicked after interaction`);
-        } else {
-            console.log("No '.App-Button' found");
+            if (btn) {
+                setTimeout(() => {
+                    btn.click();
+                    console.log("Login button clicked after delay");
+                }, 2000);
+            }
+        }, 2000);
+        return;
+    }
+
+    // Logout and menu pages
+    const links = document.querySelectorAll("a");
+    for (let i = 0; i < links.length; i++) {
+        const text = links[i].textContent.trim();
+
+        // click the first valid link immediately
+        if (text === "Revenir à la page d'accueil" || text === "Ouvrir une session") {
+            setTimeout(() => {
+                links[i].click();
+                console.log(`Clicked link: '${text}'`);
+            }, 0); // 0s
+            break;
         }
-    } else {
-        console.log("Already connected or input not found");
     }
 }
 
-// Automatically run on page load
+// Run on page load
 window.addEventListener("load", () => {
-    autoReconnect();
-    // Continuous check to stay connected
-    setInterval(autoReconnect, CHECK_INTERVAL_MS);
+    setTimeout(() => {
+        autoReconnect();
+
+        // check continuously every 2s
+        setInterval(() => {
+            autoReconnect();
+        }, CHECK_INTERVAL_MS);
+    }, 0); // immediate start for non-login pages
 });

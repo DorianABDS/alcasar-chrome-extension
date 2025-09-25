@@ -10,12 +10,12 @@ This Chrome extension allows you to **automatically handle the authentication fl
 
 ## Features
 
-* **Auto-click on authentication and navigation buttons** including `.App-Button`, `.{ID_name_login}`, and `.{ID_name_logout}` after a configurable delay.
-* **Interaction preparation**: detects `.App-Input` before triggering clicks to prevent disconnections.
-* **Auto-reconnect**: if the user is logged out, the script navigates to the login page and simulates interaction to reconnect.
-* **Session maintenance**: continuously checks connection status to prevent accidental logouts.
-* **Configurable delay** (in milliseconds) before interactions to match page rendering times.
-* **No user interface required**: all operations are done in the background.
+* **Auto-click on navigation and authentication links** based on link text (`Revenir à la page d'accueil` and `Ouvrir une session`).
+* **Login page handling**: waits 1 second for credentials to appear before interacting with input and button.
+* **Immediate action on other pages**: clicks navigation links instantly.
+* **Auto-reconnect**: if logged out, the script navigates to the login page and interacts automatically.
+* **Session maintenance**: checks continuously every 2 seconds to prevent accidental logouts.
+* **No UI required**: everything runs in the background.
 
 ---
 
@@ -53,24 +53,31 @@ This Chrome extension allows you to **automatically handle the authentication fl
 
 ## Configuration
 
-* The delay before automatic actions can be configured in the main script file (`content.js`) using:
+* Interval for continuous checking can be set in `content.js`:
 
   ```javascript
-  const CHECK_INTERVAL_MS = 2000; // 2 seconds by default
+  const CHECK_INTERVAL_MS = 2000; // 2 seconds
   ```
 
-* All CSS selectors for buttons and inputs (`.App-Button`, `.App-Input`, `.{ID_name_login}`, `.{ID_name_logout}`) can be customized to match updates to the portal interface.
+* Delays for login input and button are set in `setTimeout` (1 second each in this version).
+
+* The script relies on link text to identify navigation (`Revenir à la page d'accueil` and `Ouvrir une session`).
 
 ---
 
 ## How It Works
 
-1. **Logout detection**: the script clicks `. {ID_name_logout}` if found to return to the menu.
-2. **Login navigation**: clicks `. {ID_name_login}` to reach the login page.
-3. **Input interaction**: focuses and clicks `.App-Input` to simulate user activity.
-   > ⚠️ **Note:** As soon as the login page loads, it is important to perform a manual interaction, like clicking anywhere on the page or pressing a key, so that the page detects human activity. Without this, the login may constantly fail.
-4. **Authentication**: clicks `.App-Button` to log in.
-5. **Continuous checking**: every `CHECK_INTERVAL_MS`, the script repeats the process to maintain the session.
+1. **Login page**:
+
+   * Waits 1 second for credentials.
+   * Focuses and clicks the input field.
+   * Clicks the login button after 1 second.
+2. **Other pages**:
+
+   * Clicks the first navigation link (`Revenir à la page d'accueil` or `Ouvrir une session`) immediately.
+3. **Continuous checking**:
+
+   * Every 2 seconds, the script repeats to maintain session.
 
 ---
 

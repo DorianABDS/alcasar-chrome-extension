@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Auto-connexion Alcasar ",
   "version": "1.3.0",
-  "description": "Clique automatiquement sur le bouton 'Authentification' au chargement de la page.",
+  "description": "Automatise le clic sur le bouton de connexion lors du chargement de la page.",
   "content_scripts": [
     {
       "matches": [

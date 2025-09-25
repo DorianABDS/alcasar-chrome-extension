@@ -9,7 +9,7 @@
         "https://alcasar.laplateforme.io/*"
       ],
       "js": [
-        "content_script.js"
+        "assets/script/content_script.js"
       ],
       "run_at": "document_idle"
     }

@@ -1,7 +1,7 @@
-// autoReconnect.js - Logique de reconnexion automatique
+// Logique de reconnexion automatique
 const CHECK_INTERVAL_MS = 2000; // 2s
 
-export function autoReconnect() {
+function autoReconnect() {
     // Local status verification
     if (localStorage.getItem('autoReconnectActive') === 'false') {
         return;
@@ -43,5 +43,3 @@ export function autoReconnect() {
         }
     }
 }
-
-export { CHECK_INTERVAL_MS };

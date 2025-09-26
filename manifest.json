@@ -1,24 +1,29 @@
 {
   "manifest_version": 3,
-  "name": "ALCASAR Auto-Reconnect",
+  "name": "Auto-connexion Alcasar",
   "version": "1.3.1",
   "description": "Reconnexion automatique pour ALCASAR avec bouton de contrôle",
 
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://alcasar.laplateforme.io/*"],
       "js": [
-        "script/main.js"
+        "assets/script/toast.js",
+        "assets/script/cssInjector.js",
+        "assets/script/autoReconnect.js",
+        "assets/script/stateManager.js",
+        "assets/script/floatingButton.js",
+        "assets/script/main.js"
       ],
-      "type": "module"
+      "run_at": "document_idle"
     }
   ],
 
   "web_accessible_resources": [
     {
       "resources": [
-        "assets/style/styles.css",
-        "assets/images/alcasar-logo.png"
+        "assets/css/styles.css",
+        "assets/icons/*"
       ],
       "matches": ["<all_urls>"]
     }

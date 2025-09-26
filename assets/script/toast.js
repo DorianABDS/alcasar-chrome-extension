@@ -1,5 +1,5 @@
 // Toast notification system
-export function showToast(message) {
+function showToast(message) {
     const toast = document.createElement('div');
     toast.textContent = message;
     toast.className = "toast-floating";

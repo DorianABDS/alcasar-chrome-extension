@@ -1,0 +1,106 @@
+/* styles.css - Styles pour le bouton flottant et toast */
+
+.btn-floating {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    width: 60px;
+    height: 60px;
+    background-color: #f5f5f5;
+    border: 2px solid #d4b59f;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Pour positionner le pin */
+}
+
+.btn-floating:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-floating:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 181, 159, 0.4);
+}
+
+.logo-floating {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-pin {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+}
+
+.toast-floating {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    font-weight: bold;
+    animation: fadein 0.3s ease, fadeout 0.3s ease 2.7s;
+    max-width: 90%;
+    word-break: break-word;
+}
+
+/* Animation pour apparition et disparition */
+@keyframes fadein {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeout {
+    from {opacity: 1; transform: translateY(0);}
+    to {opacity: 0; transform: translateY(-10px);}
+}
+
+@media screen and (max-width: 768px) {
+    .btn-floating {
+        bottom: 12px;
+        right: 12px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-floating {
+        width: 40px;
+        height: 40px;
+    }
+
+    .status-pin {
+        width: 12px;
+        height: 12px;
+        bottom: 3px;
+        right: 3px;
+    }
+
+    .toast-floating {
+        top: 12px;
+        right: 12px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+

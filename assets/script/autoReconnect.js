@@ -1,6 +1,12 @@
+// autoReconnect.js - Logique de reconnexion automatique
 const CHECK_INTERVAL_MS = 2000; // 2s
 
-function autoReconnect() {
+export function autoReconnect() {
+    // Local status verification
+    if (localStorage.getItem('autoReconnectActive') === 'false') {
+        return;
+    }
+
     const inputCheck = document.querySelector(".App-Input"); // login input
     const btn = document.querySelector(".App-Button"); // login button
 
@@ -38,14 +44,4 @@ function autoReconnect() {
     }
 }
 
-// Run on page load
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        autoReconnect();
-
-        // check continuously every 2s
-        setInterval(() => {
-            autoReconnect();
-        }, CHECK_INTERVAL_MS);
-    }, 0); // immediate start for non-login pages
-});
+export { CHECK_INTERVAL_MS };

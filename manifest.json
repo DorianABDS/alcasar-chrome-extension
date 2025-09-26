@@ -2,29 +2,34 @@
   "manifest_version": 3,
   "name": "Auto-connexion Alcasar",
   "version": "1.3.1",
-  "description": "Automatise le clic sur le bouton de connexion lors du chargement de la page.",
-  "icons": {
-    "16": "assets/icons/alcasar.webp",
-    "48": "assets/icons/alcasar.webp",
-    "128": "assets/icons/alcasar.webp"
-  },
+  "description": "Reconnexion automatique pour ALCASAR avec bouton de contrôle",
+
   "content_scripts": [
     {
-      "matches": [
-        "https://alcasar.laplateforme.io/*"
-      ],
+      "matches": ["https://alcasar.laplateforme.io/*"],
       "js": [
-        "assets/script/content_script.js"
+        "assets/script/toast.js",
+        "assets/script/cssInjector.js",
+        "assets/script/autoReconnect.js",
+        "assets/script/stateManager.js",
+        "assets/script/floatingButton.js",
+        "assets/script/main.js"
       ],
       "run_at": "document_idle"
     }
   ],
+
   "web_accessible_resources": [
     {
       "resources": [
-        "assets/icons/alcasar.webp"
+        "assets/css/styles.css",
+        "assets/icons/*"
       ],
       "matches": ["<all_urls>"]
     }
+  ],
+
+  "permissions": [
+    "storage"
   ]
 }

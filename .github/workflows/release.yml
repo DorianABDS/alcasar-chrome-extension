@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -11,6 +14,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    # Only run release job on push to main, not on PRs
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,57 +25,44 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm ci
-
-      - name: Check if release needed
-        id: check_release
+      - name: Skip if tag already exists
+        id: check_tag
         run: |
-          CURRENT_TAG="v$(node -p "require('./package.json').version")"
-          echo "CURRENT_TAG=$CURRENT_TAG" >> $GITHUB_OUTPUT
-
-          if git rev-parse "$CURRENT_TAG" >/dev/null 2>&1; then
-            echo "Tag $CURRENT_TAG already exists, skipping release."
+          TAG="v$(node -p "require('./package.json').version")"
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists, skipping release."
             echo "SKIP=true" >> $GITHUB_OUTPUT
           else
             echo "SKIP=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Configure Git for pushing
-        if: steps.check_release.outputs.SKIP == 'false'
+      - run: npm ci
+
+      - name: Configure Git user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/DorianABDS/alcasar-chrome-extension.git
 
-      - name: Run release (creates new version and tag)
-        if: steps.check_release.outputs.SKIP == 'false'
+      - name: Run release
+        if: steps.check_tag.outputs.SKIP == 'false'
         run: npm run release
 
-      - name: Get new version after release
-        if: steps.check_release.outputs.SKIP == 'false'
-        id: new_version
-        run: |
-          NEW_TAG="v$(node -p "require('./package.json').version")"
-          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_OUTPUT
-          echo "New version: $NEW_TAG"
-
       - name: Commit version bump and changelog
-        if: steps.check_release.outputs.SKIP == 'false'
+        if: steps.check_tag.outputs.SKIP == 'false'
         run: |
           git add package.json package-lock.json CHANGELOG.md manifest.json
-          git diff --cached --quiet || git commit -m "chore(release): bump version to ${{ steps.new_version.outputs.NEW_TAG }} [skip ci]"
-          git push origin main
+          git diff --cached --quiet || (git commit -m "chore(release): bump version [skip ci]" && git push origin main)
 
       - name: Push tags
-        if: steps.check_release.outputs.SKIP == 'false'
+        if: steps.check_tag.outputs.SKIP == 'false'
         run: git push origin --tags
 
       - name: Create GitHub Release
-        if: steps.check_release.outputs.SKIP == 'false'
+        if: steps.check_tag.outputs.SKIP == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.new_version.outputs.NEW_TAG }}
-          name: Release ${{ steps.new_version.outputs.NEW_TAG }}
+          tag_name: ${{ steps.check_tag.outputs.TAG }}
           body_path: CHANGELOG.md
           generate_release_notes: true
         env:

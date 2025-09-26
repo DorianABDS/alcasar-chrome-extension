@@ -20,7 +20,7 @@ function createFloatingButton() { // eslint-disable-line no-unused-vars
 
     // Create logo image
     const logo = document.createElement('img');
-    logo.src = chrome.runtime.getURL('assets/icons/alcasar.png');
+    logo.src = chrome.runtime.getURL('assets/icons/alcasar.webp');
     logo.alt = 'ALCASAR';
     logo.className = 'logo-floating';
     button.appendChild(logo);
@@ -174,12 +174,26 @@ function updateButtonState(button) {
         button.appendChild(statusPin);
     }
 
+    // Force pin size (override any conflicting styles)
+    statusPin.style.width = '14px';
+    statusPin.style.height = '14px';
+    statusPin.style.minWidth = '14px';
+    statusPin.style.minHeight = '14px';
+    statusPin.style.maxWidth = '14px';
+    statusPin.style.maxHeight = '14px';
+    statusPin.style.borderRadius = '50%';
+    statusPin.style.border = '2px solid white';
+    statusPin.style.position = 'absolute';
+    statusPin.style.bottom = '2px';
+    statusPin.style.right = '2px';
+    statusPin.style.boxSizing = 'border-box';
+
     // Update pin color and tooltip
     if (isActive) {
         statusPin.style.backgroundColor = '#4caf50';
-        button.title = '🟢 Auto-connexion Alcasar ACTIVÉ\n• Clic pour désactiver\n• Glisser pour déplacer';
+        button.title = '🟢 Auto-Reconnect ACTIVÉ\n• Clic pour désactiver\n• Glisser pour déplacer';
     } else {
         statusPin.style.backgroundColor = '#f44336';
-        button.title = '🔴 Auto-connexion Alcasar DÉSACTIVÉ\n• Clic pour activer\n• Glisser pour déplacer';
+        button.title = '🔴 Auto-Reconnect DÉSACTIVÉ\n• Clic pour activer\n• Glisser pour déplacer';
     }
 }

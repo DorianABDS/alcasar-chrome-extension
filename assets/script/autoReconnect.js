@@ -1,10 +1,10 @@
 /* exported CHECK_INTERVAL_MS, autoReconnect */
 
 // Check interval in milliseconds
-const CHECK_INTERVAL_MS = 2000;
+const CHECK_INTERVAL_MS = 2000; // eslint-disable-line no-unused-vars
 
 // Main reconnection logic
-function autoReconnect() {
+function autoReconnect() { // eslint-disable-line no-unused-vars
     // Skip if extension is disabled
     if (localStorage.getItem('autoReconnectActive') === 'false') {
         return;

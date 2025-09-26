@@ -1,4 +1,4 @@
-/* global chrome, toggleExtension, isExtensionActive */
+/* global toggleExtension, isExtensionActive */
 /* exported createFloatingButton, updateButtonState */
 
 // Drag and drop variables
@@ -7,7 +7,7 @@ let dragStartTime = 0;
 let startX, startY, offsetX, offsetY;
 
 // Create floating button
-function createFloatingButton() {
+function createFloatingButton() { // eslint-disable-line no-unused-vars
     // Skip if button already exists
     if (document.getElementById('floating-btn')) {
         return;
@@ -20,7 +20,7 @@ function createFloatingButton() {
 
     // Create logo image
     const logo = document.createElement('img');
-    logo.src = chrome.runtime.getURL('assets/icons/alcasar.webp');
+    logo.src = chrome.runtime.getURL('assets/icons/alcasar.png');
     logo.alt = 'ALCASAR';
     logo.className = 'logo-floating';
     button.appendChild(logo);

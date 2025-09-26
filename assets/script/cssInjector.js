@@ -1,8 +1,7 @@
-/* global chrome */
 /* exported injectCssIfNeeded */
 
 // Inject CSS styles into page
-function injectCssIfNeeded() {
+function injectCssIfNeeded() { // eslint-disable-line no-unused-vars
     // Check if already injected
     if (!document.getElementById('auto-reconnect-style')) {
         // Create CSS link element

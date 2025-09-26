@@ -1,7 +1,7 @@
 /* exported showToast */
 
 // Show notification message
-function showToast(message) {
+function showToast(message) { // eslint-disable-line no-unused-vars
     // Create toast element
     const toast = document.createElement('div');
     toast.textContent = message;

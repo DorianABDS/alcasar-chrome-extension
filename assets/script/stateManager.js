@@ -34,7 +34,7 @@ function stopAutoReconnect() {
 }
 
 // Toggle extension on/off
-function toggleExtension(button) {
+function toggleExtension(button) { // eslint-disable-line no-unused-vars
     const isActive = isExtensionActive();
 
     if (isActive) {

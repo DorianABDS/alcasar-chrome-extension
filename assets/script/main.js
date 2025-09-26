@@ -1,3 +1,5 @@
+/* global injectCssIfNeeded, createFloatingButton, isExtensionActive, startAutoReconnect */
+
 // Initialize extension
 function init() {
     // Load CSS styles

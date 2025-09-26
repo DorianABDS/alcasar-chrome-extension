@@ -1,3 +1,6 @@
+/* global chrome, toggleExtension, isExtensionActive */
+/* exported createFloatingButton, updateButtonState */
+
 // Drag and drop variables
 let isDragging = false;
 let dragStartTime = 0;

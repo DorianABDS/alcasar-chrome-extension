@@ -1,3 +1,6 @@
+/* global autoReconnect, CHECK_INTERVAL_MS, showToast, updateButtonState */
+/* exported isExtensionActive, startAutoReconnect, stopAutoReconnect, toggleExtension */
+
 // Store reconnection interval
 let reconnectInterval = null;
 

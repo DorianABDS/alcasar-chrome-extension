@@ -1,3 +1,6 @@
+/* global chrome */
+/* exported injectCssIfNeeded */
+
 // Inject CSS styles into page
 function injectCssIfNeeded() {
     // Check if already injected

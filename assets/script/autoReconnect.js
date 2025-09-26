@@ -1,3 +1,5 @@
+/* exported CHECK_INTERVAL_MS, autoReconnect */
+
 // Check interval in milliseconds
 const CHECK_INTERVAL_MS = 2000;
 

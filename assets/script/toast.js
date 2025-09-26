@@ -1,3 +1,5 @@
+/* exported showToast */
+
 // Show notification message
 function showToast(message) {
     // Create toast element

@@ -1,6 +1,6 @@
-// Extension initialization
+// Initialize extension
 function init() {
-    // CSS injection
+    // Load CSS styles
     injectCssIfNeeded();
 
     // Create floating button
@@ -12,7 +12,7 @@ function init() {
     }
 }
 
-// Launch on page load
+// Start when page loads
 window.addEventListener("load", () => {
     setTimeout(init, 0);
 });

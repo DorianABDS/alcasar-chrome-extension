@@ -1,23 +1,26 @@
-// Logique de reconnexion automatique
-const CHECK_INTERVAL_MS = 2000; // 2s
+// Check interval in milliseconds
+const CHECK_INTERVAL_MS = 2000;
 
+// Main reconnection logic
 function autoReconnect() {
-    // Local status verification
+    // Skip if extension is disabled
     if (localStorage.getItem('autoReconnectActive') === 'false') {
         return;
     }
 
-    const inputCheck = document.querySelector(".App-Input"); // login input
-    const btn = document.querySelector(".App-Button"); // login button
+    // Find login elements
+    const inputCheck = document.querySelector(".App-Input");
+    const btn = document.querySelector(".App-Button");
 
-    // Login page
+    // Handle login page
     if (inputCheck) {
-        // wait 2s to let credentials appear
         setTimeout(() => {
+            // Focus and click input field
             inputCheck.focus();
             inputCheck.click();
             console.log("Simulated interaction on input");
 
+            // Click login button after delay
             if (btn) {
                 setTimeout(() => {
                     btn.click();
@@ -28,17 +31,17 @@ function autoReconnect() {
         return;
     }
 
-    // Logout and menu pages
+    // Handle logout and menu pages
     const links = document.querySelectorAll("a");
     for (let i = 0; i < links.length; i++) {
         const text = links[i].textContent.trim();
 
-        // click the first valid link immediately
+        // Click reconnection links
         if (text === "Revenir à la page d'accueil" || text === "Ouvrir une session") {
             setTimeout(() => {
                 links[i].click();
                 console.log(`Clicked link: '${text}'`);
-            }, 0); // 0s
+            }, 0);
             break;
         }
     }

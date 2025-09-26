@@ -1,14 +1,17 @@
+// Store reconnection interval
 let reconnectInterval = null;
 
-// Check if extension should work
+// Check if extension is active
 function isExtensionActive() {
     return localStorage.getItem('autoReconnectActive') !== 'false';
 }
 
 // Start automatic reconnection
 function startAutoReconnect() {
+    // Skip if already running
     if (reconnectInterval) return;
 
+    // Run immediately then set interval
     autoReconnect();
     reconnectInterval = setInterval(() => {
         autoReconnect();
@@ -19,6 +22,7 @@ function startAutoReconnect() {
 
 // Stop automatic reconnection
 function stopAutoReconnect() {
+    // Clear interval if exists
     if (reconnectInterval) {
         clearInterval(reconnectInterval);
         reconnectInterval = null;
@@ -26,7 +30,7 @@ function stopAutoReconnect() {
     }
 }
 
-// Toggle ON/OFF extension
+// Toggle extension on/off
 function toggleExtension(button) {
     const isActive = isExtensionActive();
 
@@ -34,13 +38,14 @@ function toggleExtension(button) {
         // Disable extension
         localStorage.setItem('autoReconnectActive', 'false');
         stopAutoReconnect();
-        showToast("🔴 Extension désactivée");
+        showToast("🔴 Extension désactivé");
     } else {
         // Enable extension
         localStorage.setItem('autoReconnectActive', 'true');
         startAutoReconnect();
-        showToast("🟢 Extension activée");
+        showToast("🟢 Extension activé");
     }
 
+    // Update button appearance
     updateButtonState(button);
 }
